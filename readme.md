@@ -11,7 +11,7 @@ Redes sociais
 
 Paulo Victor: <a href="https://www.linkedin.com/in/paulopbi/" target="_blank">Linkedin</a> •
             <a href="https://github.com/paulopbi" target="_blank">Github</a>
-| Gabriel: <a href="linkedin.com/in/gabriel-fagundes-a54a82251/" target="_blank">Linkedin</a> •
+| Gabriel: <a href="https://linkedin.com/in/gabriel-fagundes-a54a82251/" target="_blank">Linkedin</a> •
         <a href="https://github.com/gabrafo" target="_blank">Github</a> 
 
   </div>
