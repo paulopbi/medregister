@@ -42,8 +42,9 @@ cd medregister
 3. Compile e Execute o Projeto:
 
 ```bash
-javac Main.java
-java Main
+javac src/application/Main.java 
+java src/application/Main.java
+
 ```
 
 ## Contribuição
