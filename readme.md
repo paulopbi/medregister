@@ -3,7 +3,7 @@
 
 <p align="center"><img src="./assets/logo.png"></p>
 
-Bem-vindo ao MedRegister, seu Sistema de Cadastro Hospitalar em Java! 
+Bem-vindo ao **MedRegister**, seu Sistema de Cadastro Hospitalar em Java! 
 Este projeto foi desenvolvido para  oferecer uma solução de gerenciamento 
 eficiente para informações de  funcionários e pacientes em um ambiente hospitalar. 👨‍💻 <br>
 
@@ -31,7 +31,7 @@ Siga os passos abaixo para começar a utilizar o sistema:
 1. Clone o Repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/medregister.git
+git clone https://github.com/paulopbi/medregister
 ```
 
 2. Navegue até o Diretório do Projeto:
