@@ -10,5 +10,4 @@ public class Paciente extends Pessoa{
     public void alterarDados() {
 
     }
-
 }
