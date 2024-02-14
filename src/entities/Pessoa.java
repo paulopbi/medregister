@@ -8,6 +8,8 @@ public abstract class Pessoa {
     private char sexo;
     private String telefone;
 
+    public Pessoa() {
+    }
 
     public Pessoa(String nome, String cpf, String rg, String dataDeNascimento, char sexo, String telefone) {
         this.setNome(nome);
