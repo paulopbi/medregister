@@ -2,6 +2,7 @@ package util;
 
 public class Personalizacao {
     public static final String COR_RESET = "\u001b[0m";
+    public static final String COR_AMARELA = "\u001b[33m";
     public static final String COR_VERDE = "\u001b[32m";
     public static final String COR_AZUL = "\u001b[34m";
     public static final String COR_ROXA = "\u001b[35m";
