@@ -1,7 +1,6 @@
 package entities;
 
 public abstract class Pessoa {
-    protected long id;
     private String nome;
     private String cpf;
     private String rg;
@@ -10,8 +9,6 @@ public abstract class Pessoa {
     private String telefone;
 
 
-
-    public Pessoa(){}
     public Pessoa(String nome, String cpf, String rg, String dataDeNascimento, char sexo, String telefone) {
         this.setNome(nome);
         this.setCpf(cpf);
@@ -22,14 +19,6 @@ public abstract class Pessoa {
     }
 
     public abstract void alterarDados();
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -81,8 +70,6 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Nome: " + this.getNome() + "\nCpf: " + this.getCpf() + "\nRG: " + this.getRg()
-                + "\nData de nascimento: " + this.getDataDeNascimento() + "\nSexo: " + this.getSexo()
-                + "\nTelefone: " + this.getTelefone();
+        return "Nome: " + this.getNome() + "\nCpf: " + this.getCpf() + "\nRG: " + this.getRg() + "\nData de nascimento: " + this.getDataDeNascimento() + "\nSexo: " + this.getSexo() + "\nTelefone: " + this.getTelefone();
     }
 }
