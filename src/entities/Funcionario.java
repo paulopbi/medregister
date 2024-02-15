@@ -1,7 +1,5 @@
 package entities;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static util.Personalizacao.*;
@@ -12,12 +10,11 @@ public class Funcionario extends Pessoa {
     Funcionario funcionario;
     private String profissao;
     private String nivelDeEscolaridade;
-    private LocalDate dataAdmissao;
 
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String cpf, String rg, String dataDeNascimento, char sexo, String telefone, String profissao, String nivelEscoalaridade) {
+    public Funcionario(String nome, String cpf, String rg, String dataDeNascimento, char sexo, int telefone, String profissao, String nivelEscoalaridade) {
         super(nome, cpf, rg, dataDeNascimento, sexo, telefone);
         this.setProfissao(profissao);
         this.setNivelDeEscolaridade(nivelEscoalaridade);
@@ -39,11 +36,6 @@ public class Funcionario extends Pessoa {
         this.nivelDeEscolaridade = nivelDeEscolaridade;
     }
 
-    public String formatDataAdmissao() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dataAdmissao.format(fmt);
-    }
-
     public void cadastrarFuncionario() {
         System.out.println("\n---------- Cadastro De Funcionarios ----------");
         sc = new Scanner(System.in);
@@ -53,8 +45,9 @@ public class Funcionario extends Pessoa {
         super.setNome(nome);
 
         System.out.print("Digite o seu CPF: ");
-        String cpf = sc.nextLine();
-        super.setCpf(cpf);
+        String cpf = sc.next();
+        validaCPF(cpf, sc);
+        sc.nextLine(); // Consome quebra de linha
 
         System.out.print("Digite o seu RG: ");
         String rg = sc.nextLine();
@@ -68,10 +61,9 @@ public class Funcionario extends Pessoa {
         char sexo = sc.next().charAt(0);
         super.setSexo(sexo);
 
-        System.out.print("Digite o seu telefone: ");
-        sc.nextLine();
-        String telefone = sc.nextLine();
-        super.setTelefone(telefone);
+        System.out.print("Digite o seu telefone (com o DDD): ");
+        int telefone = sc.nextInt();
+        validaTelefone(telefone, sc);
 
         System.out.print("Digite a sua profissao: ");
         String profissao = sc.nextLine();
@@ -96,8 +88,9 @@ public class Funcionario extends Pessoa {
         setNome(nome);
 
         System.out.print("Digite o seu CPF: ");
-        String cpf = sc.nextLine();
-        setCpf(cpf);
+        String cpf = sc.next();
+        validaCPF(cpf, sc);
+        sc.nextLine(); // Consome quebra de linha
 
         System.out.print("Digite o seu RG: ");
         String rg = sc.nextLine();
@@ -113,8 +106,8 @@ public class Funcionario extends Pessoa {
 
         System.out.print("Digite o seu telefone: ");
         sc.nextLine();
-        String telefone = sc.nextLine();
-        setTelefone(telefone);
+        int telefone = sc.nextInt();
+        validaTelefone(telefone, sc);
 
         System.out.print("Digite a sua profissao: ");
         String profissao = sc.nextLine();
