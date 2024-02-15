@@ -84,7 +84,7 @@ public class Funcionario extends Pessoa {
         funcionario = new Funcionario(nome, cpf, rg, nascimento, sexo, telefone, profissao, escolaridade);
 
         System.out.println(COR_VERDE + "\n[+] Dados Cadastrados" + COR_RESET);
-        System.out.println(funcionario);
+        System.out.println(funcionario + "\nProfissao: " + this.getProfissao() + "\nEscolaridade: " + this.getNivelDeEscolaridade());
     }
 
     @Override
