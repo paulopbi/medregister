@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static util.Personalizacao.*;
@@ -11,11 +13,13 @@ public class Funcionario extends Pessoa {
     private String profissao;
     private String nivelDeEscolaridade;
 
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String cpf, String rg, String dataDeNascimento, char sexo, int telefone, String profissao, String nivelEscoalaridade) {
-        super(nome, cpf, rg, dataDeNascimento, sexo, telefone);
+    public Funcionario(String nome, String cpf, LocalDate dataDeNascimento, char sexo, String telefone, String profissao, String nivelEscoalaridade) {
+        super(nome, cpf, dataDeNascimento, sexo, telefone);
         this.setProfissao(profissao);
         this.setNivelDeEscolaridade(nivelEscoalaridade);
     }
@@ -49,21 +53,30 @@ public class Funcionario extends Pessoa {
         validaCPF(cpf, sc);
         sc.nextLine(); // Consome quebra de linha
 
-        System.out.print("Digite o seu RG: ");
-        String rg = sc.nextLine();
-        super.setRg(rg);
+        System.out.print("Digite a sua data de nascimento (no formato DD/MM/YYYY): ");
+        boolean validBirthday = false; // Variável sentinela pra que o loop da entrada do aniversário funcione corretamente
+        LocalDate dataDeNascimento = null; // Inicializa como null
 
-        System.out.print("Digite a sua data de nascimento: ");
-        String nascimento = sc.nextLine();
-        super.setDataDeNascimento(nascimento);
+        while(!validBirthday) {
+            try {
+                // Converte a string para LocalDate usando o formatador
+                String nascimento = sc.nextLine();
+                dataDeNascimento = LocalDate.parse(nascimento, fmt);
+                validBirthday = true;
+            } catch (Exception e) {
+                System.out.println("Formato de data inválido. Use o formato DD-MM-YYYY.");
+            }
+        }
 
         System.out.print("Digite o sexo (M ou F): ");
         char sexo = sc.next().charAt(0);
         super.setSexo(sexo);
 
-        System.out.print("Digite o seu telefone (com o DDD): ");
-        int telefone = sc.nextInt();
+        System.out.print("Digite o seu telefone: ");
+        sc.nextLine(); // Consume quebra de linha
+        String telefone = sc.next();
         validaTelefone(telefone, sc);
+        sc.nextLine(); // Consume quebra de linha
 
         System.out.print("Digite a sua profissao: ");
         String profissao = sc.nextLine();
@@ -73,7 +86,7 @@ public class Funcionario extends Pessoa {
         String escolaridade = sc.nextLine();
         this.setNivelDeEscolaridade(escolaridade);
 
-        funcionario = new Funcionario(nome, cpf, rg, nascimento, sexo, telefone, profissao, escolaridade);
+        funcionario = new Funcionario(nome, cpf, dataDeNascimento, sexo, telefone, profissao, escolaridade);
 
         System.out.println(COR_VERDE + "\n[+] Dados Cadastrados" + COR_RESET);
         System.out.println(funcionario + "\nProfissao: " + this.getProfissao() + "\nEscolaridade: " + this.getNivelDeEscolaridade());
@@ -92,22 +105,32 @@ public class Funcionario extends Pessoa {
         validaCPF(cpf, sc);
         sc.nextLine(); // Consome quebra de linha
 
-        System.out.print("Digite o seu RG: ");
-        String rg = sc.nextLine();
-        setRg(rg);
+        System.out.print("Digite a sua data de nascimento (no formato DD/MM/YYYY): ");
+        boolean validBirthday = false; // Variável sentinela pra que o loop da entrada do aniversário funcione corretamente
 
-        System.out.print("Digite a sua data de nascimento: ");
-        String nascimento = sc.nextLine();
-        setDataDeNascimento(nascimento);
+        while(!validBirthday) {
+            try {
+                // Converte a string para LocalDate usando o formatador
+                String nascimento = sc.nextLine();
+                LocalDate dataDeNascimento = LocalDate.parse(nascimento, fmt);
+                setDataDeNascimento(dataDeNascimento);
+                validBirthday = true;
+            } catch (Exception e) {
+                System.out.println("Formato de data inválido. Use o formato DD/MM/YYYY.");
+
+                System.out.print("Digite novamente a sua data de nascimento: ");
+            }
+        }
 
         System.out.print("Digite o sexo (M ou F): ");
         char sexo = sc.next().charAt(0);
         setSexo(sexo);
 
         System.out.print("Digite o seu telefone: ");
-        sc.nextLine();
-        int telefone = sc.nextInt();
+        sc.nextLine(); // Consume quebra de linha
+        String telefone = sc.next();
         validaTelefone(telefone, sc);
+        sc.nextLine(); // Consume quebra de linha
 
         System.out.print("Digite a sua profissao: ");
         String profissao = sc.nextLine();

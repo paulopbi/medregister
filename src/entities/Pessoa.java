@@ -1,23 +1,25 @@
 package entities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Pessoa {
     private String nome;
     private String cpf;
-    private String rg;
-    private String dataDeNascimento;
+    private LocalDate dataDeNascimento;
     private char sexo;
-    private int telefone;
+    private String telefone;
+
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String cpf, String rg, String dataDeNascimento, char sexo, int telefone) {
+    public Pessoa(String nome, String cpf, LocalDate dataDeNascimento, char sexo, String telefone) {
         this.setNome(nome);
         this.setCpf(cpf);
-        this.setRg(rg);
         this.setDataDeNascimento(dataDeNascimento);
         this.setSexo(sexo);
         this.setTelefone(telefone);
@@ -25,27 +27,25 @@ public abstract class Pessoa {
 
     public abstract void alterarDados();
 
-    public void validaTelefone(int telefone, Scanner sc){
-        boolean entradaValida = false; // Variável sentinela para fazer a checagem do loop
+    public void validaTelefone(String telefone, Scanner sc) {
+        boolean entradaValida = false;
 
-        while(!entradaValida) {
-            try{
-                if (Integer.toString(telefone).length() == 11) {
+        while (!entradaValida) {
+            try {
+                if (telefone.length() == 11 && telefone.matches("\\d+")) {
                     setTelefone(telefone);
                     entradaValida = true;
                 } else {
-                    System.out.println("O número de telefone deve ter exatamente 11 dígitos.");
+                    System.out.println("O número de telefone deve ter exatamente 11 dígitos e consistir apenas em números.");
                 }
             } catch (InputMismatchException e) {
-                // Captura a exceção se a entrada não for um número inteiro
                 System.out.println("Entrada inválida. Por favor, insira um dado válido.");
 
-                // Limpa o buffer se a próxima entrada não for um número inteiro
-                if(!sc.hasNextInt()){
+                if (!sc.hasNext()) {
                     sc.nextLine();
                 }
 
-                telefone = sc.nextInt();
+                telefone = sc.next();
             }
         }
     }
@@ -123,13 +123,17 @@ public abstract class Pessoa {
                         }
                         CPF = sc.next();
                     }
+                    if(!entradaValida) {
+                        // Solicita novo CPF
+                        System.out.println("Digite novamente: ");
+                        if (!sc.hasNext()) {
+                            sc.nextLine(); // Limpa buffer
+                        }
+                        CPF = sc.next();
+                    }
                 }
             } else {
                 System.out.println("Digitos do CPF são todos iguais.");
-            }
-
-            if(!entradaValida) {
-                // Solicita novo CPF
                 System.out.println("Digite novamente: ");
                 if (!sc.hasNext()) {
                     sc.nextLine(); // Limpa buffer
@@ -155,19 +159,12 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    public String getRg() {
-        return rg;
-    }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -179,16 +176,16 @@ public abstract class Pessoa {
         this.sexo = sexo;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
     @Override
     public String toString() {
-        return "Nome: " + this.getNome() + "\nCpf: " + this.getCpf() + "\nRG: " + this.getRg() + "\nData de nascimento: " + this.getDataDeNascimento() + "\nSexo: " + this.getSexo() + "\nTelefone: " + this.getTelefone();
+        return "Nome: " + nome + "\nCPF: " + cpf + "\nData de nascimento: " + dataDeNascimento.format(fmt) + "\nSexo: " + sexo + "\nTelefone: " + telefone;
     }
 }
